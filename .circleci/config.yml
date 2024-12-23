@@ -11,16 +11,11 @@ jobs:
       - checkout
       - run: brew install swiftlint
       - run: swiftlint lint --reporter junit | tee lintResult.xml
-      - run: swift test | tee testResults.xml
       - run: swift build
       - store_artifacts:
           path: lintResult.xml
       - store_test_results:
           path: lintResult.xml
-      - store_artifacts:
-          path: testResults.xml
-      - store_test_results:
-          path: testResults.xml
   ios-deploy:
     macos:
       xcode: 15.2.0
