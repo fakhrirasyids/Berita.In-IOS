@@ -21,13 +21,8 @@ jobs:
       - run:
           name: Lint Swift Code
           command: swiftlint lint --reporter junit | tee lintResult.xml
-      - run:
-          name: Build with Xcode
-          command: xcodebuild -project Berita.In.xcodeproj -scheme Berita.In build -verbose
       - store_artifacts:
           path: lintResult.xml
-      - store_artifacts:
-          path: ~/Library/Logs/xcodebuild
 
   ios-deploy:
     macos:
