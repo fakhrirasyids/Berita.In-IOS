@@ -1,0 +1,30 @@
+/*
+  Localizable.strings
+  Berita.In
+
+  Created by Fakhri Rasyid Saputro on 15/12/24.
+
+*/
+
+// Home
+"top_headlines" = "Berita Teratas";
+"see_all" = "Lihat Semua >";
+"Business" = "Bisnis";
+"Entertainment" = "Hiburan";
+"Health" = "Kesehatan";
+"Science" = "Sains";
+"Sport" = "Olahraga";
+"Technology" = "Teknologi";
+
+"loading_headlines" = "Memuat berita teratas...";
+"loading_news" = "Memuat berita %@...";
+
+// Search
+"search_news" = "Cari Berita";
+"search_here" = "Cari Di Sini!";
+
+"loading_news_search" = "Memuat berita...";
+
+// Favorites
+"favorites" = "Favorit";
+"empty_favorite" = "Favorit masih kosong!\nSilakan tambahkan beberapa berita ke favorit Anda";

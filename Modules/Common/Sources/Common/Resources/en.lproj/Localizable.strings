@@ -1,0 +1,30 @@
+/*
+  Localizable.strings
+  Berita.In
+
+  Created by Fakhri Rasyid Saputro on 15/12/24.
+
+*/
+
+// Home
+"top_headlines" = "Top Headlines";
+"see_all" = "See All >";
+"Business" = "Business";
+"Entertainment" = "Entertainment";
+"Health" = "Health";
+"Science" = "Science";
+"Sport" = "Sport";
+"Technology" = "Technology";
+
+"loading_headlines" = "Loading Top Headlines...";
+"loading_news" = "Loading %@ news...";
+
+// Search
+"search_news" = "Search News";
+"search_here" = "Search Here!";
+
+"loading_news_search" = "Loading News...";
+
+// Favorites
+"favorites" = "Favorites";
+"empty_favorite" = "Favorite is still empty!\nPlease add some news to your favorites";
