@@ -10,47 +10,20 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Print Working Directory
-          command: pwd
-      - run:
-          name: List Files in Current Directory
-          command: ls -la
-      - run:
           name: Install SwiftLint
           command: brew install swiftlint
       - run:
           name: Lint Swift Code
           command: swiftlint lint --reporter junit | tee lintResult.xml
+      - run:
+          name: Build with Swift Package Manager (SPM)
+          command: swift build
       - store_artifacts:
           path: lintResult.xml
-
-  ios-deploy:
-    macos:
-      xcode: "15.2.0"
-      resource_class: macos.m1.medium.gen1
-    steps:
-      - checkout
-      - macos/switch-ruby:
-          version: "3.0"
-      - run:
-          name: Print Working Directory (before fastlane)
-          command: pwd
-      - run:
-          name: List Files in Current Directory (before fastlane)
-          command: ls -la
-      - run:
-          name: Install Bundler and Dependencies
-          command: |
-            gem install bundler
-            bundle install
-      - run:
-          name: Run Fastlane Dev Lane
-          command: bundle exec fastlane dev
+      - store_artifacts:
+          path: ~/Library/Logs/xcodebuild 
 
 workflows:
-  build-and-deploy-wf:
+  build-wf:
     jobs:
       - build
-      - ios-deploy:
-          requires:
-            - build
