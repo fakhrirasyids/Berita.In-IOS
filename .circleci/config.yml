@@ -1,0 +1,41 @@
+version: 2.1
+
+orbs:
+  macos: circleci/macos@2
+
+jobs:
+  build:
+    macos:
+      xcode: 14.0.1
+    steps:
+      - checkout
+      - run: brew install swiftlint
+      - run: swiftlint lint --reporter junit | tee lintResult.xml
+      - run: swift test | tee testResults.xml
+      - run: swift build
+      - store_artifacts:
+          path: lintResult.xml
+      - store_test_results:
+          path: lintResult.xml
+      - store_artifacts:
+          path: testResults.xml
+      - store_test_results:
+          path: testResults.xml
+  ios-deploy:
+    macos:
+      xcode: 14.2.0
+      resource_class: macos.x86.medium.gen2
+    steps:
+        - checkout
+        - macos/switch-ruby:
+              version: "3.0"
+        - run: bundle install
+        - run: bundle exec fastlane dev
+    
+workflows:
+  build-and-deploy-wf:
+    jobs:
+      - build
+      - ios-deploy:
+          requires:
+            - build
