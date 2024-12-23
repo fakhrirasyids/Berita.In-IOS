@@ -6,8 +6,7 @@ orbs:
 jobs:
   build:
     macos:
-      xcode: 14.0.1
-      version: "13"
+      xcode: 15.2.0
     steps:
       - checkout
       - run: brew install swiftlint
@@ -24,7 +23,7 @@ jobs:
           path: testResults.xml
   ios-deploy:
     macos:
-      xcode: 14.2.0
+      xcode: 15.2.0
       resource_class: macos.x86.medium.gen2
     steps:
         - checkout
