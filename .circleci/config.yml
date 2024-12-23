@@ -6,27 +6,40 @@ orbs:
 jobs:
   build:
     macos:
-      xcode: 15.2.0
+      xcode: "15.2.0"
     steps:
       - checkout
-      - run: brew install swiftlint
-      - run: swiftlint lint --reporter junit | tee lintResult.xml
-      - run: swift build
+      - run:
+          name: Install SwiftLint
+          command: brew install swiftlint
+      - run:
+          name: Lint Swift Code
+          command: swiftlint lint --reporter junit | tee lintResult.xml
+      - run:
+          name: Build with Xcode
+          command: xcodebuild -project Berita.In.xcodeproj -scheme Berita.In build
       - store_artifacts:
           path: lintResult.xml
-      - store_test_results:
-          path: lintResult.xml
+      - store_artifacts:
+          path: ~/Library/Logs/xcodebuild
+
   ios-deploy:
     macos:
-      xcode: 15.2.0
+      xcode: "15.2.0"
       resource_class: macos.x86.medium.gen2
     steps:
-        - checkout
-        - macos/switch-ruby:
-              version: "3.0"
-        - run: bundle install
-        - run: bundle exec fastlane dev
-    
+      - checkout
+      - macos/switch-ruby:
+          version: "3.0"
+      - run:
+          name: Install Bundler and Dependencies
+          command: |
+            gem install bundler  # Install bundler if not already installed
+            bundle install  # Install required Ruby gems from the Gemfile
+      - run:
+          name: Run Fastlane Dev Lane
+          command: bundle exec fastlane dev
+
 workflows:
   build-and-deploy-wf:
     jobs:
