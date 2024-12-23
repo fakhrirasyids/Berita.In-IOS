@@ -10,6 +10,12 @@ jobs:
     steps:
       - checkout
       - run:
+          name: Print Working Directory
+          command: pwd
+      - run:
+          name: List Files in Current Directory
+          command: ls -la
+      - run:
           name: Install SwiftLint
           command: brew install swiftlint
       - run:
@@ -31,6 +37,12 @@ jobs:
       - checkout
       - macos/switch-ruby:
           version: "3.0"
+      - run:
+          name: Print Working Directory (before fastlane)
+          command: pwd
+      - run:
+          name: List Files in Current Directory (before fastlane)
+          command: ls -la
       - run:
           name: Install Bundler and Dependencies
           command: |
