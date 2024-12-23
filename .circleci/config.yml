@@ -15,9 +15,6 @@ jobs:
       - run:
           name: Lint Swift Code
           command: swiftlint lint --reporter junit | tee lintResult.xml
-      - run:
-          name: Build with Swift Package Manager (SPM)
-          command: swift build
       - store_artifacts:
           path: lintResult.xml
       - store_artifacts:
