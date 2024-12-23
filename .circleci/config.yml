@@ -1,0 +1,26 @@
+version: 2.1
+
+orbs:
+  macos: circleci/macos@2
+
+jobs:
+  build:
+    macos:
+      xcode: "15.2.0"
+    steps:
+      - checkout
+      - run:
+          name: Install SwiftLint
+          command: brew install swiftlint
+      - run:
+          name: Lint Swift Code
+          command: swiftlint lint --reporter junit | tee lintResult.xml
+      - store_artifacts:
+          path: lintResult.xml
+      - store_artifacts:
+          path: ~/Library/Logs/xcodebuild 
+
+workflows:
+  build-wf:
+    jobs:
+      - build
